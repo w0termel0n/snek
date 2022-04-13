@@ -2,10 +2,19 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title> Snek </title>
+    
+    <style>
+      canvas {
+        border:2px solid black;
+        background-color: #87ceeb;
+      }
+    </style>
   </head>
 
-  <body>
+  <body onload="start()">
     <h1 style="text-align: center">Snek Game</h1>
     <script>
       var SNAKE_W = 40;
