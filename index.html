@@ -20,6 +20,8 @@
       var SNAKE_W = 40;
       var SNAKE_H = 40;
       var SNAKE_COLOR = Color.green;
+      var canvasWidth = 600;
+      var canvasHeight = 400;
       var snek;
       var dot;
       var score;
@@ -33,6 +35,8 @@
       var dir;
 
       function start(){
+        gameCanvas.start();
+        
         snek = new Rectangle(SNAKE_W,SNAKE_H);
         snek.setPosition((getWidth()/2)-(SNAKE_W/2),(getHeight()/2)-(SNAKE_H/2));
         snek.setColor(SNAKE_COLOR);
@@ -48,6 +52,16 @@
         add(dot);
 
         keyDownMethod(move);
+      }
+      
+      var gameCanvas = {
+        canvas: document.createElement("canvas"),
+        start: function() {
+            this.canvas.width = canvasWidth;
+            this.canvas.height = canvasHeight;
+            this.context = this.canvas.getContext("2d");
+            document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        }
       }
 
       function move(e){
