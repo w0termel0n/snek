@@ -75,30 +75,38 @@
               stopTimer(north);
           }
           if(e.keyCode==Keyboard.RIGHT){
-              if(scr<80){
-                  setTimer(east,80-(scr*10));
-              }else{
-                  setTimer(east,5);
-              }
-          }else if(e.keyCode==Keyboard.DOWN){
-              if(scr<80){
-                  setTimer(south,80-(scr*10));
-              }else{
-                  setTimer(south,5);
-              }
-          }else if(e.keyCode==Keyboard.LEFT){
-              if(scr<80){
-                  setTimer(west,80-(scr*10));
-              }else{
-                  setTimer(west,5);
-              }
-          }else if(e.keyCode==Keyboard.UP){
-              if(scr<80){
-                  setTimer(north,80-(scr*10));
-              }else{
-                  setTimer(north,5);
-              }
-          }
+            if(scr>10){
+                setTimer(east,2);
+            }else if((scr*10)<80){
+                setTimer(east,80-(scr*10));
+            }else{
+                setTimer(east,5);
+            }
+        }else if(e.keyCode==Keyboard.DOWN){
+            if(scr>10){
+                setTimer(south,2);
+            }else if((scr*10)<80){
+                setTimer(south,80-(scr*10));
+            }else{
+                setTimer(south,5);
+            }
+        }else if(e.keyCode==Keyboard.LEFT){
+            if(scr>10){
+                setTimer(west,2);
+            }else if((scr*10)<80){
+                setTimer(west,80-(scr*10));
+            }else{
+                setTimer(west,5);
+            }
+        }else if(e.keyCode==Keyboard.UP){
+            if(scr>10){
+                setTimer(north,2);
+            }else if((scr*10)<80){
+                setTimer(north,80-(scr*10));
+            }else{
+                setTimer(north,5);
+            }
+        }
       }
 
       function east(){
