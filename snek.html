@@ -1,9 +1,162 @@
 <!DOCTYPE html>
-<html>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> Snek </title>
+  </head>
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+  <body>
+    <h1>My First Heading</h1>
+    <script>
+      var SNAKE_W = 40;
+      var SNAKE_H = 40;
+      var SNAKE_COLOR = Color.green;
+      var snek;
+      var dot;
+      var score;
+      var scr = 0;
 
-</body>
+      // Constants to represent the directions
+      var EAST = 0;
+      var SOUTH = 1;
+      var WEST = 2;
+      var NORTH = 3;
+      var dir;
+
+      function start(){
+        snek = new Rectangle(SNAKE_W,SNAKE_H);
+        snek.setPosition((getWidth()/2)-(SNAKE_W/2),(getHeight()/2)-(SNAKE_H/2));
+        snek.setColor(SNAKE_COLOR);
+        add(snek);
+
+        score = new Text("Score: " + String(scr),"15pt Arial");
+        score.setPosition(20,30);
+        add(score);
+
+        dot = new Circle(10);
+        dot.setPosition(Randomizer.nextInt(10,getWidth()-10),
+          Randomizer.nextInt(10,getHeight()-10));
+        add(dot);
+
+        keyDownMethod(move);
+      }
+
+      function move(e){
+          if(dir == EAST){
+              stopTimer(east);
+          }else if(dir == SOUTH){
+              stopTimer(south);
+          }else if(dir == WEST){
+              stopTimer(west);
+          }else if(dir == NORTH){
+              stopTimer(north);
+          }
+          if(e.keyCode==Keyboard.RIGHT){
+              if(scr<80){
+                  setTimer(east,80-(scr*10));
+              }else{
+                  setTimer(east,5);
+              }
+          }else if(e.keyCode==Keyboard.DOWN){
+              if(scr<80){
+                  setTimer(south,80-(scr*10));
+              }else{
+                  setTimer(south,5);
+              }
+          }else if(e.keyCode==Keyboard.LEFT){
+              if(scr<80){
+                  setTimer(west,80-(scr*10));
+              }else{
+                  setTimer(west,5);
+              }
+          }else if(e.keyCode==Keyboard.UP){
+              if(scr<80){
+                  setTimer(north,80-(scr*10));
+              }else{
+                  setTimer(north,5);
+              }
+          }
+      }
+
+      function east(){
+          snek.move(5,0);
+          dir = EAST;
+          if((dot.getX()>snek.getX())&&(dot.getX()<(snek.getX()+40))&&
+        (dot.getY()>snek.getY())&&(dot.getY()<(snek.getY()+40))){
+              dotMove();
+          }
+          if((snek.getX()<0)||((snek.getX()+40)>getWidth())||
+          (snek.getY()<0)||((snek.getY()+40)>getHeight())){
+              gameOver();
+          }
+      }
+
+      function south(){
+          snek.move(0,5);
+          dir = SOUTH;
+          if((dot.getX()>snek.getX())&&(dot.getX()<(snek.getX()+40))&&
+        (dot.getY()>snek.getY())&&(dot.getY()<(snek.getY()+40))){
+              dotMove();
+          }
+          if((snek.getX()<0)||((snek.getX()+40)>getWidth())||
+          (snek.getY()<0)||((snek.getY()+40)>getHeight())){
+              gameOver();
+          }
+      }
+
+      function west(){
+          snek.move(-5,0);
+          dir = WEST;
+          if((dot.getX()>snek.getX())&&(dot.getX()<(snek.getX()+40))&&
+        (dot.getY()>snek.getY())&&(dot.getY()<(snek.getY()+40))){
+              dotMove();
+          }
+          if((snek.getX()<0)||((snek.getX()+40)>getWidth())||
+          (snek.getY()<0)||((snek.getY()+40)>getHeight())){
+              gameOver();
+          }
+      }
+
+      function north(){
+          snek.move(0,-5);
+          dir = NORTH;
+          if((dot.getX()>snek.getX())&&(dot.getX()<(snek.getX()+40))&&
+        (dot.getY()>snek.getY())&&(dot.getY()<(snek.getY()+40))){
+              dotMove();
+          }
+          if((snek.getX()<0)||((snek.getX()+40)>getWidth())||
+          (snek.getY()<0)||((snek.getY()+40)>getHeight())){
+              gameOver();
+          }
+      }
+
+      function dotMove(){
+          remove(dot);
+          dot.setPosition(Randomizer.nextInt(10,getWidth()-10),
+          Randomizer.nextInt(10,getHeight()-10));
+          add(dot);
+          scr++;
+          score.setText("Score: " + String(scr));
+      }
+
+      function gameOver(){
+          if(dir == EAST){
+              stopTimer(east);
+          }else if(dir == SOUTH){
+              stopTimer(south);
+          }else if(dir == WEST){
+              stopTimer(west);
+          }else if(dir == NORTH){
+              stopTimer(north);
+          }
+
+          remove(snek);
+          remove(dot);
+
+          var end = new Text("Game Over","50pt Arial");
+          end.setPosition((getWidth()/2)-(end.getWidth()/2),(getHeight()/2)-(end.getHeight()/2));
+          add(end);
+      }
+    </script>
+  </body>
 </html>
